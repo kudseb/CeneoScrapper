@@ -1,5 +1,6 @@
 # CeneoScraper12
 ## Etap 1 - pobranie składowych pojedynczej opinii
+<<<<<<< HEAD
 - opinia               : li.review-box
 - identyfikator        : li.review-box["data-entry-id"]
 - autor                : div.reviewer-name-line
