@@ -1,12 +1,15 @@
-python -m venv.venv =initalizing v-envio w .venv
+python -m venv.venv             =initalizing v-envio w .venv
 
-source .venv/Scripts/activate = activating v-envio
+source .venv/Scripts/activate   = activating v-envio
 pip -V checking if it works
 
 git config --global user.name "name"
 git config --global user.email  "email"
-git remote add upstream https://github.com/Fiona84/CeneoScraper12S.git = ????
+git remote add upstream https://github.com/Fiona84/CeneoScraper12S.git  = ????
 
 git fetch upstream master
 git merge upstream/master --allow-unrelated-histories
 git pull upstream master --allow-unrelated-histories
+
+pip install requests == instalacja bibl request
+pip install bs4   == beautifoul soup https://www.crummy.com/software/BeautifulSoup/bs4/doc/#find
