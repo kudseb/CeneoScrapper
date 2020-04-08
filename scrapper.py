@@ -3,7 +3,6 @@ import json
 import pprint
 import requests
 from bs4 import BeautifulSoup
-
 #funkcja do ekstrakcji składowych opini
 def extract_feature(opinion,tag,tag_class,child=None):
     try:
@@ -23,12 +22,20 @@ tags={
         "recommendation":["div","product-review-summary","em"],
         "stars":["span","review-score-count"],
         "author":["div","reviewer-name-line"],
+        "content":["p","product-review-body"],
         "pros":["div", "pros-cell","ul"],
         "cons":["div", "cons-cell","ul"],
         "useful":["button","vote-yes","span"],
         "useless":["button","vote-no","span"],
         "purchased":["div", "product-review-pz","em"]
         }
+#funkcja do usuwania znakow formatujacych
+def remove_wspace(string):
+    try:
+        return features[string].replace('\n',', ').replace('\r',', ')
+    except AttributeError:
+        pass
+
 while url:
     #pobranie kodu html tej strony
     page_response =requests.get(url)
@@ -41,7 +48,12 @@ while url:
         features ={key:extract_feature(opinion, *args)
                     for key,args in tags.items()}
         features["purchased"]=(features["purchased"]=="Opinia potwierdzona zakupem")
-        features["opinion_id"]=opinion["data-entry-id"]
+        features["opinion_id"]=int(opinion["data-entry-id"])
+        features['useful']=int(features['useful'])
+        features['useless']=int(features['useless'])
+        features['content']=remove_wspace('content')
+        features['pros']=remove_wspace('pros')
+        features['cons']=remove_wspace('cons')
         dates =opinion.find("span", "review-time").find_all("time")
         features["review_date"] = dates.pop(0)["datetime"]
         try:
