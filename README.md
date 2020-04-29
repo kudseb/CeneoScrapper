@@ -48,3 +48,5 @@
         /requirements.txt
         /README.md  
         /./venv
+-widoki (Jinja)
+-routing
