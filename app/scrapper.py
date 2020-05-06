@@ -29,12 +29,7 @@ tags={
         "useless":["button","vote-no","span"],
         "purchased":["div", "product-review-pz","em"]
         }
-#funkcja do usuwania znakow formatujacych
-def remove_wspace(string):
-    try:
-        return features[string].replace('\n',', ').replace('\r',', ')
-    except AttributeError:
-        pass
+
 
 while url:
     #pobranie kodu html tej strony
