@@ -9,10 +9,10 @@ import numpy as np
 print(*os.listdir('./opinions_json'))
 #wczytanie idetyfikatora produktu, którego opinie bedą analizowanie
 product_id = input("Podaj Kod produktu: ")
+#wczytanie do ramki danych opinii z pliku
 opinions=pd.read_json("./opinions_json/"+product_id+'.json')
 opinions=opinions.set_index("opinion_id")
 
-opinions['stars']=opinions["stars"].map(lambda x: float(x.split('/')[0].replace(',','.')))
 #częstosc występowania poszczególnej liczby gwiadek
 stars = opinions["stars"].value_counts().sort_index().reindex(list(np.arange(0,5.1,0.5)), fill_value=0)
 fig, ax = plt.subplots()
@@ -30,6 +30,7 @@ recommendation.plot.pie(label='',autopct='%.1f%%')
 ax.set_title('Udizał poszczególnych rekomendacji w ogolne opini')
 plt.savefig("./figures_png/"+product_id+'_pie.png')
 plt.close()
+#podst. statys.
 stars_avarega= opinions['stars'].mean()
 pros= opinions['pros'].count()
 cons= opinions['cons'].count()
